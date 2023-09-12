@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->enum('priority', ['Low', 'Medium', 'High'])->default('Medium');
             $table->string('description');
-            $table->boolean('isChecked');
-            $table->timestamp('date')->default(now());
-            $table->timestamp('deleteDate')->nullable();
+            $table->boolean('is_checked');
+            $table->timestamp('due_date')->default(now());
+            $table->timestamp('deleted_at')->nullable();
 
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
 
