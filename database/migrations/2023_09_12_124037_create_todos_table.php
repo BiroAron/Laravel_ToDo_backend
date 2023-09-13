@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userId');
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->enum('priority', ['Low', 'Medium', 'High'])->default('Medium');
-            $table->string('description');
-            $table->boolean('is_checked');
+            $table->string('description')->nullable();
+            $table->boolean('is_checked')->default(false);
             $table->timestamp('due_date')->default(now());
             $table->timestamp('deleted_at')->nullable();
 
-            $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });
