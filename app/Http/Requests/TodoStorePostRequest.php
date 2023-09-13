@@ -26,9 +26,9 @@ class TodoStorePostRequest extends FormRequest
             'title' => ['required','string','max:255'],
             'user_id' => ['required','integer'],
             'priority' => ['string','in:Low,Medium,High'],
-            'description' => ['string'],
-            'is_checked' => ['boolean'],
-            'due_date' => ['date']
+            'description' => 'string',
+            'is_checked' => 'boolean',
+            'due_date' => 'date'
         ];
     }
 }
