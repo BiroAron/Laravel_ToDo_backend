@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-USE App\Models\Todo;
+use Illuminate\Http\JsonResponse;
+use App\Models\Todo;
 
 class TodoController extends Controller
 {
 
-    public function index()
+    public function index() : JsonResponse
     {
         $todos = Todo::all();
         return response()->json($todos);
