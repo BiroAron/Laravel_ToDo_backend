@@ -7,48 +7,30 @@ USE App\Models\Todo;
 
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return Todo::orderBy('created_at', 'DESC')->get();
+        $todos = Todo::all();
+        return response()->json($todos);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(string $todo)
+    {
+
+    }
+
+    public function update(Request $request, string $todo)
     {
 
     }
 
 
-    public function toggleChecked($id)
-    {
-;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(string $todo)
     {
 
     }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/todos/{user_id}', [TodoController::class, 'index']);
-Route::prefix('/todo')->group(function(){
-    Route::post('/', [TodoController::class, 'store']);
-
-    Route::get('/{id}', [TodoController::class, 'show']);
-
-    Route::put('/{id}', [TodoController::class, 'update']);
-    Route::put('/todos/{id}/toggle-checked', [TodoController::class, 'toggleChecked']);
-
-    Route::delete('/{id}', [TodoController::class, 'destroy']);
-});
+Route::resource('todos', TodoController::class);
+Route::resource('users', UserController::class);
