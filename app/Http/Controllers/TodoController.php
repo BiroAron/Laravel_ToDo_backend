@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoStorePostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\Todo;
@@ -15,16 +16,10 @@ class TodoController extends Controller
         return response()->json($todos);
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(TodoStorePostRequest $request): JsonResponse
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'user_id' => 'required|integer',
-            'priority' => 'string|in:Low,Medium,High',
-            'description' => 'string',
-            'is_checked' => 'boolean',
-            'due_date' => 'date',
-        ]);
+
+        $validatedData = $request->validated();
 
         $newItem = new Todo;
         $newItem->fill($validatedData);
