@@ -6,6 +6,7 @@ use App\Http\Requests\TodoStorePostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\Todo;
+use App\Http\Resources\TodoResource;
 
 class TodoController extends Controller
 {
@@ -13,19 +14,22 @@ class TodoController extends Controller
     public function index(): JsonResponse
     {
         $todos = Todo::all();
-        return response()->json($todos);
+        return response()->json(TodoResource::collection($todos));
     }
 
     public function store(TodoStorePostRequest $request): JsonResponse
     {
-
         $validatedData = $request->validated();
 
         $newItem = new Todo;
         $newItem->fill($validatedData);
         $newItem->save();
 
-        return response()->json($newItem, 201);
+        if($newItem->due_date == null){
+            $newItem->due_date = now();
+        }
+
+        return response()->json(new TodoResource($newItem), 201);
     }
 
     public function show(string $todo)
