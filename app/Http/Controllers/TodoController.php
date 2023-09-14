@@ -46,9 +46,10 @@ class TodoController extends Controller
     }
 
 
-    public function destroy(string $todo)
+    public function destroy(Todo $todo): JsonResponse
     {
-
+        $todo->delete();
+        return response()->json(['message' => 'Todo element deleted successfully']);
     }
 
 }
