@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoStorePostRequest;
+use App\Http\Requests\TodoUpdatePutRequest;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\Todo;
@@ -35,9 +37,12 @@ class TodoController extends Controller
 
     }
 
-    public function update(Request $request, string $todo)
+    public function update(TodoUpdatePutRequest $request, Todo $todo): JsonResponse
     {
+        $validatedData = $request->validated();
+        $todo->update($validatedData);
 
+        return response()->json(new TodoResource($todo));
     }
 
 
