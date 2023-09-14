@@ -12,4 +12,5 @@ class Todo extends Model
     use SoftDeletes;
 
     protected $fillable = ['title', 'user_id', 'priority', 'description', 'is_checked', 'due_date'];
+
 }
