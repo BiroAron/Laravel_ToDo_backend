@@ -37,13 +37,12 @@ class TodoController extends Controller
 
     }
 
-    public function update(TodoUpdatePutRequest $request, string $todo): JsonResponse
+    public function update(TodoUpdatePutRequest $request, Todo $todo): JsonResponse
     {
-        $todoItem = Todo::findOrFail($todo);
         $validatedData = $request->validated();
-        $todoItem->update($validatedData);
+        $todo->update($validatedData);
 
-        return response()->json(new TodoResource($todoItem));
+        return response()->json(new TodoResource($todo));
     }
 
 
