@@ -13,7 +13,4 @@ class Todo extends Model
 
     protected $fillable = ['title', 'user_id', 'priority', 'description', 'is_checked', 'due_date'];
 
-    protected $attributes = ['priority' => "Medium", 'is_checked' => false, 'due_date' => null ];
-
-    protected $dates = ['due_date'];
 }

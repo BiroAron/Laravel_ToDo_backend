@@ -25,9 +25,7 @@ class TodoController extends Controller
         $newItem->fill($validatedData);
         $newItem->save();
 
-        if($newItem->due_date == null){
-            $newItem->due_date = now();
-        }
+        $newItem = $newItem->refresh();
 
         return response()->json(new TodoResource($newItem), 201);
     }
