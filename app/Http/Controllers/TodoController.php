@@ -20,6 +20,10 @@ class TodoController extends Controller
                 'description',
                 'priority',
                 'due_date',
+            ])
+            ->allowedFilters([
+                'title',
+                'description',
             ])->get();
 
         return response()->json(TodoResource::collection($todos));
