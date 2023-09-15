@@ -4,20 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoStorePostRequest;
 use App\Http\Requests\TodoUpdatePutRequest;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\Todo;
 use App\Http\Resources\TodoResource;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TodoController extends Controller
 {
 
     public function index(): JsonResponse
     {
-        $todos = Todo::all();
+        $todos = QueryBuilder::for(Todo::class)
+            ->allowedSorts([
+                'title',
+                'description',
+                'priority',
+                'due_date',
+            ])->get();
+
         return response()->json(TodoResource::collection($todos));
     }
+
 
     public function store(TodoStorePostRequest $request): JsonResponse
     {
